@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Kiki Salgados — Cardápio Digital & Pedidos pelo WhatsApp</title>
+  <meta name="description" content="A Kiki Salgados tem produtos de excelente qualidade e preço justo acessível a todos em Iperó/SP. Coxinhas, bolinhos de queijo, croquetes e kits para festas. Peça pelo WhatsApp!">
+  <link rel="icon" type="image/jpeg" href="/images/logo.jpeg">
+
+  <!-- Open Graph / Meta Social -->
+  <meta property="og:title" content="Kiki Salgados — Se tem festa, tem Kiki Salgados!">
+  <meta property="og:description" content="Salgados sequinhos, crocantes e bem recheados por apenas R$ 0,72 a unidade! Monte seu kit ou faça seu pedido pelo WhatsApp.">
+  <meta property="og:image" content="/images/combo-salgados.jpg">
+  <meta property="og:type" content="website">
+
+  <!-- Estilos globais e fontes -->
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- Top Header / Navigation -->
+  <header class="header">
+    <div class="container header-inner">
+      <a href="#inicio" class="logo-link">
+        <img src="/images/logo.jpeg" alt="Logo Kiki Salgados" class="logo-img">
+        <div class="logo-text">
+          <h1>Kiki Salgados</h1>
+          <span>Iperó • SP</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="nav-links" aria-label="Navegação Principal">
+        <a href="#inicio" class="nav-link">Início</a>
+        <a href="#destaques" class="nav-link">Mais Pedidos</a>
+        <a href="#cardapio" class="nav-link">Cardápio</a>
+        <a href="#monte-kit" class="nav-link">Monte seu Kit</a>
+        <a href="#kits" class="nav-link">Kits Festas</a>
+        <a href="#sobre" class="nav-link">Nossa Loja</a>
+        <a href="#contato" class="nav-link">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="cart-toggle-btn" id="cart-toggle-btn" aria-label="Abrir carrinho de pedidos">
+          <span>🛒</span>
+          <span style="font-size:0.9rem">Carrinho</span>
+          <span class="cart-count" id="cart-badge">0</span>
+        </button>
+        <button class="burger-btn" id="burger-btn" aria-label="Menu de navegação">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <span class="badge-tag">⭐ Excelente Qualidade & Preço Justo</span>
+          <h2 class="hero-title">
+            Se tem festa, tem <span class="highlight">Kiki Salgados!</span>
+          </h2>
+          <p class="hero-desc">
+            Salgadinhos fritos na hora, dourados, crocantes e com recheios irresistíveis. O sabor inconfundível que conquista Iperó e região, por um preço acessível a todos!
+          </p>
+          <div class="hero-cta-group">
+            <a href="#cardapio" class="btn btn-primary btn-lg">📖 Ver Cardápio</a>
+            <a href="#monte-kit" class="btn btn-outline btn-lg">🥟 Montar Meu Kit</a>
+          </div>
+          <div class="hero-highlights">
+            <div class="hero-highlight-item">
+              <h4>R$ 0,72</h4>
+              <p>Preço unitário justo</p>
+            </div>
+            <div class="hero-highlight-item">
+              <h4>Fritos na Hora</h4>
+              <p>Crocância e sabor</p>
+            </div>
+            <div class="hero-highlight-item">
+              <h4>Iperó/SP</h4>
+              <p>Retirada ou Entrega</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="hero-image-wrapper">
+            <img src="/images/combo-salgados.jpg" alt="Bandeja de salgados dourados da Kiki Salgados" class="hero-main-img">
+            <div class="hero-floating-card">
+              <div class="hero-card-icon">⚡</div>
+              <div class="hero-card-text">
+                <b>Pronta Entrega & Encomendas</b>
+                <span>Fale direto no WhatsApp da loja</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Destaques / Queridinhos -->
+    <section id="destaques">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag accent">🔥 Mais Pedidos</span>
+          <h2 class="section-title">Os Queridinhos da Galera</h2>
+          <p class="section-subtitle">Experimente os sabores campeões que não podem faltar em nenhuma confraternização.</p>
+        </div>
+        <div class="products-grid" id="featured-grid">
+          <!-- Renderizado dinamicamente via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Cardápio Completo -->
+    <section class="menu-section" id="cardapio">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag">📋 Variedade Completa</span>
+          <h2 class="section-title">Cardápio de Salgados</h2>
+          <p class="section-subtitle">Escolha os sabores, ajuste as quantidades desejadas e adicione ao seu carrinho com um clique.</p>
+        </div>
+
+        <div class="categories-bar" id="categories-bar">
+          <!-- Categorias renderizadas via JS -->
+        </div>
+
+        <div class="products-grid" id="products-grid">
+          <!-- Catálogo completo renderizado via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Monte seu Kit / Calculadora Rápida -->
+    <section class="builder-section" id="monte-kit">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag" style="background:rgba(245,158,11,0.2);color:#FBBF24;">⚡ Prático & Rápido</span>
+          <h2 class="section-title">Monte seu Kit Personalizado</h2>
+          <p class="section-subtitle">Escolha exatamente quantos salgados deseja de cada sabor e veja o valor total calculado automaticamente na hora!</p>
+        </div>
+
+        <div class="builder-grid">
+          <!-- Lista de Seleção por Sabor -->
+          <div class="builder-list" id="builder-list">
+            <!-- Renderizado via JS -->
+          </div>
+
+          <!-- Card Resumo Fixo / Flutuante -->
+          <div class="builder-summary-card">
+            <div class="summary-title">
+              <span>Resumo do Kit</span>
+              <span style="font-size:1.1rem">🥟</span>
+            </div>
+
+            <div class="summary-stats">
+              <div>
+                <div class="stat-label">Total de Salgados</div>
+                <div class="stat-value" id="kit-total-qty">0</div>
+              </div>
+              <div>
+                <div class="stat-label">Valor Estimado</div>
+                <div class="stat-value" id="kit-total-price">R$ 0,00</div>
+              </div>
+            </div>
+
+            <div class="presets-title">Sugestões de quantidades prontas:</div>
+            <div class="presets-pills" id="presets-pills">
+              <!-- Pílulas de presets 10, 25, 50, 100 etc -->
+            </div>
+
+            <div class="summary-actions">
+              <button class="btn btn-primary btn-lg" id="kit-add-cart-btn" style="width:100%;">
+                🛒 Adicionar Kit ao Carrinho
+              </button>
+              <button class="btn btn-outline btn-sm" id="kit-clear-btn" style="color:#fff;border-color:#4B5563;">
+                Limpar Seleção
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kits & Orçamento para Festas -->
+    <section class="kits-section" id="kits">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag">🎉 Grandes Ocasiões</span>
+          <h2 class="section-title">Kits & Encomendas para Festas</h2>
+          <p class="section-subtitle">Para eventos de qualquer tamanho, receba um atendimento prioritário e sob medida.</p>
+        </div>
+
+        <div class="kits-grid" id="kits-cards-grid">
+          <!-- Renderizado via JS -->
+        </div>
+
+        <!-- Formulário de Orçamento Rápido -->
+        <div class="order-form-container" id="encomendas">
+          <div style="text-align:center;margin-bottom:28px;">
+            <h3 style="font-family:var(--font-display);font-size:1.6rem;margin-bottom:6px;">Solicite um Orçamento pelo WhatsApp</h3>
+            <p style="color:var(--gray-500);font-size:0.95rem;">Preencha os detalhes e nossa equipe responderá com a melhor cotação e opções de data.</p>
+          </div>
+
+          <form id="quote-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="quote-name">Seu Nome *</label>
+                <input type="text" id="quote-name" class="form-control" placeholder="Ex: Maria Silva" required>
+              </div>
+
+              <div class="form-group">
+                <label for="quote-qty">Quantidade Estimada de Salgados *</label>
+                <input type="number" id="quote-qty" class="form-control" placeholder="Ex: 150" min="10" required>
+              </div>
+
+              <div class="form-group">
+                <label for="form-event-type">Tipo de Evento</label>
+                <select id="form-event-type" class="form-control">
+                  <option>Pequenas Reuniões</option>
+                  <option>Aniversário & Festas</option>
+                  <option>Confraternização</option>
+                  <option>Grandes Eventos</option>
+                  <option>Outro</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="quote-date">Data Desejada</label>
+                <input type="date" id="quote-date" class="form-control">
+              </div>
+
+              <div class="form-group full-width">
+                <label for="quote-notes">Detalhes e Sabores de Preferência</label>
+                <textarea id="quote-notes" class="form-control" placeholder="Ex: Gostaria de bastante coxinha e bolinho de queijo para retirada às 17h..."></textarea>
+              </div>
+
+              <div class="form-group full-width" style="margin-top:10px;">
+                <button type="submit" class="btn btn-whatsapp btn-lg" style="width:100%;">
+                  💬 Enviar Pedido de Orçamento pelo WhatsApp
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre a Loja / Nossa Fachada -->
+    <section class="store-section" id="sobre">
+      <div class="container store-grid">
+        <div class="store-gallery">
+          <img src="/images/loja.jpeg" alt="Fachada da loja Kiki Salgados em Iperó" class="store-img-main" loading="lazy">
+        </div>
+        <div class="store-content">
+          <span class="badge-tag">📍 Nossa Casa em Iperó</span>
+          <h3>Venha nos visitar na Kiki Salgados!</h3>
+          <p>
+            Trabalhamos com dedicação diária para entregar salgados fritos, fresquinhos e com ingredientes de primeira. Localizada no coração de Iperó, nossa loja está de portas abertas para receber você e sua família ou preparar aquela encomenda caprichada para a sua festa.
+          </p>
+
+          <div class="store-features">
+            <div class="feature-box">
+              <span class="feature-icon">✨</span>
+              <div class="feature-text">
+                <b>Qualidade Garantida</b>
+                <span>Massa leve e recheios saborosos</span>
+              </div>
+            </div>
+            <div class="feature-box">
+              <span class="feature-icon">💰</span>
+              <div class="feature-text">
+                <b>Preço Acessível</b>
+                <span>Preço justo e tabela clara</span>
+              </div>
+            </div>
+            <div class="feature-box">
+              <span class="feature-icon">🛍️</span>
+              <div class="feature-text">
+                <b>Balcão & Encomendas</b>
+                <span>Pronta entrega ou retirada agendada</span>
+              </div>
+            </div>
+            <div class="feature-box">
+              <span class="feature-icon">🛵</span>
+              <div class="feature-text">
+                <b>Atendimento na Região</b>
+                <span>Consulte taxa de entrega para seu bairro</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#cardapio" class="btn btn-primary">Fazer meu pedido agora</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Localização & Contato -->
+    <section class="contact-section" id="contato">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge-tag">📞 Fale Conosco</span>
+          <h2 class="section-title">Localização & Contato</h2>
+          <p class="section-subtitle">Estamos à disposição para tirar dúvidas e preparar os melhores salgados para você.</p>
+        </div>
+
+        <div class="contact-cards">
+          <!-- Card Endereço -->
+          <div class="contact-card">
+            <div class="contact-icon-box">📍</div>
+            <div class="contact-info">
+              <h4>Endereço da Loja</h4>
+              <p id="contact-address">
+                Rua: Costa e Silva, nº 226 (Ao lado do Hotel Vitória, na rua do Cartório Eleitoral) — Iperó, SP
+              </p>
+              <a href="#" target="_blank" rel="noopener" id="contact-map-link">Ver no Google Maps ➜</a>
+            </div>
+          </div>
+
+          <!-- Card WhatsApp / Telefone -->
+          <div class="contact-card">
+            <div class="contact-icon-box">📱</div>
+            <div class="contact-info">
+              <h4>Telefone & WhatsApp</h4>
+              <p>Atendimento rápido e direto com a equipe:</p>
+              <a href="tel:5515998029216" id="contact-phone" style="font-size:1.15rem;color:var(--whatsapp)">+55 15 99802-9216</a>
+            </div>
+          </div>
+
+          <!-- Card Horários -->
+          <div class="contact-card">
+            <div class="contact-icon-box">⏰</div>
+            <div class="contact-info">
+              <h4>Horário de Atendimento</h4>
+              <p id="contact-hours">Segunda a Sábado — Encomendas e Pronta Entrega</p>
+              <span style="display:inline-block;margin-top:6px;font-size:0.85rem;color:#059669;font-weight:700;">🟢 Atendimento Aberto</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+            <img src="/images/logo.jpeg" alt="Logo Kiki Salgados" style="width:40px;height:40px;border-radius:50%;">
+            <h3>Kiki Salgados</h3>
+          </div>
+          <p>
+            O melhor sabor de Iperó para todas as suas comemorações. Salgados fritos, crocantes e feitos com amor.
+          </p>
+        </div>
+
+        <div class="footer-nav">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#destaques">Mais Pedidos</a></li>
+            <li><a href="#cardapio">Cardápio</a></li>
+            <li><a href="#monte-kit">Monte seu Kit</a></li>
+            <li><a href="#kits">Kits para Festas</a></li>
+            <li><a href="#contato">Localização</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4>Contato & Pedidos</h4>
+          <p style="font-size:0.95rem;margin-bottom:12px;">
+            Rua Costa e Silva nº 226, Iperó - SP<br>
+            WhatsApp: <b>(15) 99802-9216</b>
+          </p>
+          <a href="https://wa.me/5515998029216?text=Ol%C3%A1%2C%20Kiki%20Salgados!" target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm">
+            Falar pelo WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© <span id="year">2026</span> Kiki Salgados. Todos os direitos reservados.</div>
+        <div>Desenvolvido com excelência para Cardápio Digital & Encomendas.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action -->
+  <a href="#" target="_blank" rel="noopener" class="floating-whatsapp" id="floating-whatsapp" aria-label="Falar no WhatsApp">
+    <span class="floating-whatsapp-icon">💬</span>
+    <span>Pedir no WhatsApp</span>
+  </a>
+
+  <!-- Cart Drawer Component -->
+  <div class="cart-overlay" id="cart-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Carrinho de Compras">
+    <div class="cart-header">
+      <h3 id="cart-drawer-title">Seu Pedido</h3>
+      <button class="cart-close-btn" id="cart-close-btn" aria-label="Fechar carrinho">✕</button>
+    </div>
+    <div class="cart-body" id="cart-body">
+      <!-- Itens do carrinho ou formulário de checkout -->
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <!-- Total e botão de checkout -->
+    </div>
+  </aside>
+
+  <!-- Script Principal -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
