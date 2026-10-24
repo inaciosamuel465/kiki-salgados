@@ -127,6 +127,12 @@ footer .brand{color:#fff}
 pre.msg{white-space:pre-wrap;background:var(--soft);padding:12px;border-radius:10px;font:.85rem/1.5 ui-monospace,monospace;max-height:220px;overflow:auto}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#171717;color:#fff;padding:10px 18px;border-radius:10px;z-index:90;font-weight:700;display:none;max-width:90%}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.chip-qty{padding:4px 8px;font-size:.82rem;font-weight:700;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--k);cursor:pointer;transition:.15s}
+.chip-qty:hover,.chip-qty.active{background:var(--y);color:#171717;border-color:#171717}
+.card{transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 20px rgba(0,0,0,.1)}
+
 </style>
 </head>
 <body>
@@ -212,26 +218,31 @@ pre.msg{white-space:pre-wrap;background:var(--soft);padding:12px;border-radius:1
 <script>
 /* ===== CONFIGURAÇÃO (editável) ===== */
 const CONFIG={
-  whatsapp:"",            // somente dígitos com DDI+DDD, ex.: 55XXXXXXXXXXX — a ser informado pela loja
-  address:"",hours:"",mapUrl:"",instagram:"",pickupInfo:"",deliveryInfo:"",
+  whatsapp:"5515998029216",
+  address:"Rua: Costa e Silva n 226 (Ao Lado Do Hotel Vitória Na Rua Do Cartório Eleitoral De Ipero), 18560-000 Iperó, SP",
+  hours:"Segunda a Sábado — Encomendas e Pronta Entrega",
+  mapUrl:"https://www.google.com/maps/search/?api=1&query=Rua+Costa+e+Silva+226+Ipero+SP",
+  instagram:"",
+  pickupInfo:"Retirada na loja em Iperó",
+  deliveryInfo:"Entrega sob consulta de taxa para Iperó e região",
   offerDelivery:true,offerPickup:true,
-  minPerFlavor:null,      // só aplicar após confirmação da loja
+  minPerFlavor:null,
   defaultQty:10,
-  presets:[10,25,50,75,100],
+  presets:[10,15,20,25,30,40,50,75,100],
   featured:["coxinha","bolinha-calabresa","bolinho-queijo"]
 };
 /* ===== CATÁLOGO (preços em centavos) ===== */
 const UNIT=72; // R$ 0,72 — preço de referência do cardápio, a confirmar para todos os sabores
 const CATS=["Todos","Queijos","Carnes e frango"];
 const PRODUCTS=[
- {id:"bolinha-calabresa",name:"Bolinha de calabresa",cat:"Carnes e frango",desc:"Salgado frito em formato de bolinha, sabor calabresa.",price:UNIT},
- {id:"bolinho-queijo",name:"Bolinho de queijo",cat:"Queijos",desc:"Bolinho com recheio de queijo.",price:UNIT},
- {id:"cartucho-queijo-azeitona",name:"Cartucho de queijo com azeitonas",cat:"Queijos",desc:"Cartucho de queijo com azeitonas.",price:UNIT},
- {id:"cremosinho-queijo-milho",name:"Cremosinho de queijo com milho",cat:"Queijos",desc:"Cremosinho de queijo com milho.",price:UNIT},
- {id:"coxinha",name:"Coxinha",cat:"Carnes e frango",desc:"A clássica coxinha de festa.",price:UNIT},
- {id:"croquete-carne",name:"Croquete de carne",cat:"Carnes e frango",desc:"Croquete de carne.",price:UNIT},
- {id:"croquete-calafrango",name:"Croquete de calafrango",cat:"Carnes e frango",desc:"Croquete de calafrango.",price:UNIT},
- {id:"travesseirinho",name:"Travesseirinho de presunto e queijo",cat:"Queijos",desc:"Travesseirinho recheado com presunto e queijo.",price:UNIT}
+ {id:"coxinha",name:"Coxinha",cat:"Carnes e frango",desc:"A clássica coxinha de festa dourada e crocante.",price:UNIT,img:"/images/coxinha.jpg"},
+ {id:"bolinho-queijo",name:"Bolinho de queijo",cat:"Queijos",desc:"Bolinho crocante com recheio de queijo derretido.",price:UNIT,img:"/images/bolinho-queijo.jpg"},
+ {id:"bolinha-calabresa",name:"Bolinha de calabresa",cat:"Carnes e frango",desc:"Salgado frito em formato de bolinha, sabor calabresa.",price:UNIT,img:"/images/bolinha-calabresa.jpg"},
+ {id:"croquete-carne",name:"Croquete de carne",cat:"Carnes e frango",desc:"Croquete de carne temperada e bem suculenta.",price:UNIT,img:"/images/croquete-carne.jpg"},
+ {id:"croquete-calafrango",name:"Croquete de calafrango",cat:"Carnes e frango",desc:"Combinação especial de calabresa com frango cremoso.",price:UNIT,img:"/images/croquete-calafrango.jpg"},
+ {id:"travesseirinho",name:"Travesseirinho de presunto e queijo",cat:"Queijos",desc:"Travesseirinho recheado com presunto e queijo.",price:UNIT,img:"/images/travesseirinho.jpg"},
+ {id:"cartucho-queijo-azeitona",name:"Cartucho de queijo com azeitonas",cat:"Queijos",desc:"Cartucho crocante de queijo com azeitonas.",price:UNIT,img:"/images/cartucho-queijo.jpg"},
+ {id:"cremosinho-queijo-milho",name:"Cremosinho de queijo com milho",cat:"Queijos",desc:"Cremosinho redondo de queijo com milho.",price:UNIT,img:"/images/cremosinho-milho.jpg"}
 ];
 const KITS=["Kit para pequenas reuniões","Kit para aniversário","Kit para confraternização","Kit para eventos maiores"];
 /* ===== UTILITÁRIOS ===== */
@@ -251,8 +262,16 @@ function setQty(id,q){if(q<=0)delete cart[id];else cart[id]=q;save()}
 /* ===== VITRINE E CARDÁPIO ===== */
 const draft={};
 function card(p){const q=draft[p.id]||CONFIG.defaultQty;
- return `<article class="card"><div class="ph" role="img" aria-label="Foto de ${p.name} em breve">Foto do produto em breve</div><div class="b"><h3>${p.name}</h3><p>${p.desc}</p><div class="price"><span>${brl(p.price)}</span> <small>/ unidade</small></div>
- <div class="act"><div class="step"><button data-m="${p.id}" aria-label="Diminuir">−</button><output>${q}</output><button data-p="${p.id}" aria-label="Aumentar">+</button></div><button class="btn" data-a="${p.id}">Adicionar</button></div></div></article>`}
+ const photo = p.img ? `<div class="ph photo" style="background-image:url('${p.img}');aspect-ratio:4/3;background-size:cover;background-position:center" role="img" aria-label="${p.name}"></div>` : `<div class="ph" role="img" aria-label="Foto de ${p.name} em breve">Foto do produto em breve</div>`;
+ return `<article class="card">${photo}<div class="b"><h3>${p.name}</h3><p>${p.desc}</p><div class="price"><span>${brl(p.price)}</span> <small>/ unidade</small></div>
+ <div class="quick-qtys" style="display:flex;gap:6px;align-items:center;margin-top:4px;flex-wrap:wrap">
+   <small style="font-weight:700;color:var(--mut);width:100%">Qtd rápida:</small>
+   <button class="chip-qty ${q===10?'active':''}" data-sq="${p.id}" data-val="10">10</button>
+   <button class="chip-qty ${q===25?'active':''}" data-sq="${p.id}" data-val="25">25</button>
+   <button class="chip-qty ${q===50?'active':''}" data-sq="${p.id}" data-val="50">50</button>
+   <button class="chip-qty ${q===100?'active':''}" data-sq="${p.id}" data-val="100">100</button>
+ </div>
+ <div class="act" style="margin-top:8px"><div class="step"><button data-m="${p.id}" aria-label="Diminuir">−</button><output>${q}</output><button data-p="${p.id}" aria-label="Aumentar">+</button></div><button class="btn" data-a="${p.id}">Adicionar</button></div></div></article>`}
 let cat="Todos";
 function renderMenu(){
  $("#featured").innerHTML=CONFIG.featured.map(byId).filter(Boolean).map(card).join("");
@@ -261,8 +280,9 @@ function renderMenu(){
 document.addEventListener("click",e=>{
  const t=e.target.closest("button");if(!t)return;
  if(t.dataset.c){cat=t.dataset.c;renderMenu()}
- if(t.dataset.p){draft[t.dataset.p]=(draft[t.dataset.p]||CONFIG.defaultQty)+1;renderMenu()}
- if(t.dataset.m){draft[t.dataset.m]=Math.max(1,(draft[t.dataset.m]||CONFIG.defaultQty)-1);renderMenu()}
+ if(t.dataset.sq){draft[t.dataset.sq]=+t.dataset.val;renderMenu()}
+ if(t.dataset.p){draft[t.dataset.p]=(draft[t.dataset.p]||CONFIG.defaultQty)+5;renderMenu()}
+ if(t.dataset.m){draft[t.dataset.m]=Math.max(1,(draft[t.dataset.m]||CONFIG.defaultQty)-5);renderMenu()}
  if(t.dataset.a){addToCart(t.dataset.a,draft[t.dataset.a]||CONFIG.defaultQty);toast("Adicionado ao pedido")}
 });
 /* ===== MONTE SEU KIT ===== */
@@ -284,7 +304,9 @@ document.addEventListener("click",e=>{const t=e.target.closest("button");if(!t)r
 $("#kClear").onclick=()=>{kit={};renderKit()};
 $("#kAdd").onclick=()=>{Object.entries(kit).forEach(([i,n])=>addToCart(i,n));kit={};renderKit();toast("Kit adicionado ao carrinho")};
 /* ===== KITS / ORÇAMENTO ===== */
-$("#kitCards").innerHTML=KITS.map(k=>`<article class="card"><div class="ph" aria-hidden="true">${k.replace("Kit para ","")}</div><div class="b"><h3>${k}</h3><p>Quantidade e valores sob consulta.</p><a class="btn" href="#encomendas" data-kit="${k}">Solicitar orçamento</a></div></article>`).join("");
+$("#kitCards").innerHTML=KITS.map((k,i)=>{
+ const imgs=["/images/combo-salgados.jpg","/images/coxinha.jpg","/images/bolinho-queijo.jpg","/images/croquete-carne.jpg"];
+ return `<article class="card"><div class="ph photo" style="background-image:url('${imgs[i%imgs.length]}');background-size:cover;background-position:center;aspect-ratio:4/3;" aria-hidden="true"></div><div class="b"><h3>${k}</h3><p>Quantidade e valores sob consulta.</p><a class="btn" href="#encomendas" data-kit="${k}">Solicitar orçamento</a></div></article>`}).join("");
 document.addEventListener("click",e=>{const a=e.target.closest("[data-kit]");if(a){const o=[...$("#qType").options].find(x=>a.dataset.kit.toLowerCase().includes(x.text.toLowerCase().slice(0,6)));if(o)$("#qType").value=o.value}});
 function needWa(){if(!CONFIG.whatsapp){toast("WhatsApp da loja ainda não configurado");return true}return false}
 $("#qSend").onclick=()=>{
