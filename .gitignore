@@ -1,18 +1,30 @@
-# Dependencies
+# Dependências
 node_modules/
 .pnp
 .pnp.js
 
-# Production build
+# Build de Produção
 dist/
 
-# Logs
+# Áudios e Narrações (locais para vídeos promocionais)
+audios/
+*.mp3
+*.wav
+
+# Scripts auxiliares e temporários de automação
+generate_narration.py
+list_voices.py
+clean_preview.js
+*.backup.html
+
+# Logs e Cache
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.eslintcache
 
-# Editor / OS
+# Sistema Operacional e Editores
 .DS_Store
 Thumbs.db
 .vscode/
